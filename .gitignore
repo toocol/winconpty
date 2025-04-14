@@ -1,0 +1,61 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.credentials
+starter/.credentials
+starter/.vertx/
+starter/arthas-output
+*.log
+pom-xml-flattened
+.flattened-pom.xml
+runPom.xml
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### VERTX ###
+.vertx/
+
+### GRADLE ###
+.gradle
+
+dependency-reduced-pom.xml
+
+### cmake build directory ###
+build-emulator-Desktop_Qt_*/
+
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+.vs/
+x64/
+out/
+build/
+
+*.dll
+*.lib
