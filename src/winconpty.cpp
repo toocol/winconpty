@@ -15,7 +15,7 @@ volatile static int counter = 1;
  */
 CONPTY* getConPty(int);
 
-int openConPty(int lines, int columns) {
+int openConPty(int columns, int lines) {
   HRESULT hr{E_UNEXPECTED};
   CONPTY* conpty = new CONPTY{};
   HANDLE pipeInPtySide{INVALID_HANDLE_VALUE};
@@ -78,7 +78,7 @@ void setUTF8Mode(bool on) {
   }
 }
 
-void resizeConPty(int fd, int lines, int columns) {
+void resizeConPty(int fd, int columns, int lines) {
   CONPTY* conpty = getConPty(fd);
   if (!conpty) return;
   COORD size{SHORT(columns), SHORT(lines)};

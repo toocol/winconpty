@@ -4,6 +4,13 @@
 #include <functional>
 #include "conptytypes.h"
 
+// C ABI 
+extern "C" typedef void (*RustCallback)(char* data, int len);
+
+// C ABI Brige to startReadListener
+extern "C" __declspec(dllexport) void startReadListenerBridge(int id,
+                                                              RustCallback cb);
+
 /**
  * Starting a thread to listen the read pipe to get data from conpty.
  */

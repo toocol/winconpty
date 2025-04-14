@@ -10,6 +10,13 @@ using namespace _winconpty_;
 
 void readPipeListener(int, function<void(char*, int)>);
 
+void startReadListenerBridge(int id, RustCallback cb) {
+  std::function<void(char*, int)> f = [cb](char* data, int len) {
+    cb(data, len);
+  };
+  startReadListener(id, f);
+}
+
 void startReadListener(int fd, std::function<void(char*, int)> whenRecieve) {
   thread(&readPipeListener, fd, whenRecieve).detach();
 }

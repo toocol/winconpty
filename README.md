@@ -1,3 +1,8 @@
-# WinConPty (Shared library of ConPty)
+# WinConPty (Library of ConPty)
 The Windows version of PTY, base on ConPTY.  
-To see [sample project](https://github.com/toocol/termio/tree/master/samples/conpty) of Win32 Pseudo Console(ConPty).
+
+[ConPTY Introduce](https://devblogs.microsoft.com/commandline/windows-command-line-introducing-the-windows-pseudo-console-conpty/)  
+
+## Requirements
+- Windows 10 Insider build 17733 or later
+- [Latest Windows 10 Insider SDK](https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewSDK)
