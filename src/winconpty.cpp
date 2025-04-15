@@ -120,7 +120,7 @@ bool startSubProcess(int fd, LPWSTR command) {
                : HRESULT_FROM_WIN32(GetLastError());
     }
     if (S_OK == hr) {
-      hr = CreateProcess(nullptr,  // No module name - use Command Line
+      hr = CreateProcessW(nullptr,  // No module name - use Command Line
                          command,  // Command Line
                          nullptr,  // Process handle not inheritable
                          nullptr,  // Thread handle not inheritable

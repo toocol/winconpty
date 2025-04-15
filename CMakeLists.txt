@@ -6,6 +6,13 @@ if (WIN32)
     add_definitions(/utf-8)
 endif()
 
+if(NOT CMAKE_BUILD_TYPE)
+set(CMAKE_BUILD_TYPE Release)
+endif()
+set(CMAKE_CXX_FLAGS_RELEASE -Ofast)
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -O3  -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3  -Wall")
+
 add_definitions(-DUNICODE)
 
 include_directories("src/")
@@ -21,7 +28,7 @@ set(SOURCES
 	src/conptytypes.cpp
 )
 
-add_library(winconpty SHARED
+add_library(winconpty STATIC
 	${SOURCES}
 )
 

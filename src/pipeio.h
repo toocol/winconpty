@@ -4,21 +4,23 @@
 #include <functional>
 #include "conptytypes.h"
 
-// C ABI 
-extern "C" typedef void (*RustCallback)(char* data, int len);
+#define REXPORT __declspec(dllexport)
+#define RCALL __stdcall
 
-// C ABI Brige to startReadListener
-extern "C" __declspec(dllexport) void startReadListenerBridge(int id,
-                                                              RustCallback cb);
+extern "C" {
+typedef void (*RustCallback)(char* data, int len);
+
+// Brige to startReadListener
+REXPORT void RCALL startReadListenerBridge(int id, RustCallback cb);
+
+/**
+ * Writing data to ConPty.
+ */
+REXPORT void RCALL writeData(int, const char*);
+}
 
 /**
  * Starting a thread to listen the read pipe to get data from conpty.
  */
-__declspec(dllexport) void startReadListener(int,
-                                             std::function<void(char*, int)>);
-/**
- * Writing data to ConPty.
- */
-__declspec(dllexport) void writeData(int, const char*);
-
+void startReadListener(int, std::function<void(char*, int)>);
 #endif
