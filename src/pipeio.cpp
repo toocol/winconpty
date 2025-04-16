@@ -8,16 +8,16 @@
 using namespace std;
 using namespace _winconpty_;
 
-void readPipeListener(int, function<void(char*, int)>);
+void readPipeListener(int, function<void(int, char*, int)>);
 
 void startReadListenerBridge(int id, RustCallback cb) {
-  std::function<void(char*, int)> f = [cb](char* data, int len) {
-    cb(data, len);
+  std::function<void(int, char*, int)> f = [cb](int fd, char* data, int len) {
+    cb(fd, data, len);
   };
   startReadListener(id, f);
 }
 
-void startReadListener(int fd, std::function<void(char*, int)> whenRecieve) {
+void startReadListener(int fd, std::function<void(int, char*, int)> whenRecieve) {
   thread(&readPipeListener, fd, whenRecieve).detach();
 }
 
@@ -33,7 +33,7 @@ void writeData(int fd, const char* data) {
                      &dwBytesWritten, NULL);
 }
 
-void readPipeListener(int fd, function<void(char*, int)> whenRecieve) {
+void readPipeListener(int fd, function<void(int, char*, int)> whenRecieve) {
   CONPTY* conpty = Storage::conptysMap[fd];
   if (!conpty) return;
 
@@ -48,7 +48,7 @@ void readPipeListener(int fd, function<void(char*, int)> whenRecieve) {
                      &dwBytesRead, NULL);
 
     if (fRead && dwBytesRead > 0) {
-      whenRecieve(szBuffer, dwBytesRead + 1);
+      whenRecieve(fd, szBuffer, dwBytesRead + 1);
     }
     memset(szBuffer, 0, dwBytesRead);
   } while (!conpty->closed);

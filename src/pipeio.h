@@ -8,7 +8,7 @@
 #define RCALL __stdcall
 
 extern "C" {
-typedef void (*RustCallback)(char* data, int len);
+typedef void (*RustCallback)(int fd, char* data, int len);
 
 // Brige to startReadListener
 REXPORT void RCALL startReadListenerBridge(int id, RustCallback cb);
@@ -22,5 +22,5 @@ REXPORT void RCALL writeData(int, const char*);
 /**
  * Starting a thread to listen the read pipe to get data from conpty.
  */
-void startReadListener(int, std::function<void(char*, int)>);
+void startReadListener(int, std::function<void(int, char*, int)>);
 #endif
